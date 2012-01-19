@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :photo_url %><br />
+    <%= f.text_field :photo_url %>
+  </div>
+
+  <div class="field">
     <%= f.label :position_id %><br />
     <%= f.select :position_id, Position.select_options %>
   </div>

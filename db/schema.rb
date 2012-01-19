@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120119030840) do
   create_table "candidates", :force => true do |t|
     t.string   "name"
     t.text     "bio"
+    t.string   "photo_url"
     t.integer  "position_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -36,3 +37,4 @@ ActiveRecord::Schema.define(:version => 20120119030840) do
   end
 
 end
+
