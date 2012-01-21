@@ -1,5 +1,6 @@
 class Position < ActiveRecord::Base
   has_many :candidates
+  has_many :vote
 
 
   def Position.select_options

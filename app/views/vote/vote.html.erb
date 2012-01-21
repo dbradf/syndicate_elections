@@ -1,0 +1,21 @@
+<h1>Choose</h1>
+
+<%= form_for(@vote) do |f| %>
+
+  <%= hidden_field_tag :voter_id, @voter.id %>
+
+  <% @positions.each do |p| %>
+    <h2><%= p.title %></h2>
+    <p>(Pick <%= p.count %>)</p>
+
+    <ul>
+      <% p.candidates.each do |c| %>
+        <li><%= check_box_tag "vote[#{c.id}]", p.id %> 
+        <%= c.name %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

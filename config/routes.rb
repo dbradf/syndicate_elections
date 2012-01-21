@@ -1,7 +1,12 @@
 SyndicateElections::Application.routes.draw do
-  resources :candidates
+  get "vote/index"
+  get "vote/vote"
 
+  resources :voters
+  resources :votes
+  resources :candidates
   resources :positions
+  resources :users
 
   get 'admin' => 'admin#index'
 
@@ -11,7 +16,6 @@ SyndicateElections::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
