@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+  before_filter :authenticate
   # GET /candidates
   # GET /candidates.json
   def index

@@ -1,4 +1,39 @@
-<h1>Choose</h1>
+<script language="javascript">
+
+  function clickVote(cls, max, divId)
+  {
+    var choices = document.getElementsByClassName(cls);
+    var i;
+    var checkCount = 0;
+    var div = document.getElementById(divId);
+
+    for (i = 0; i < choices.length; i = i + 1) {
+      if (choices[i].checked) {
+        checkCount++;
+      }
+    }
+
+    for (i = 0; i < choices.length; i = i + 1) {
+      if (!choices[i].checked) {
+        if (checkCount < max) {
+          choices[i].disabled = false;
+        } else {
+          choices[i].disabled = true;
+        }
+      }
+    }
+
+    if (checkCount < max) {
+      div.style.color = 'black';
+    } else {
+      div.style.color = '#b0b0b0';
+    }
+  }
+
+</script>
+
+
+<h1>Choose Your Votes</h1>
 
 <%= form_for(@vote) do |f| %>
 
@@ -8,12 +43,20 @@
     <h2><%= p.title %></h2>
     <p>(Pick <%= p.count %>)</p>
 
-    <ul>
-      <% p.candidates.each do |c| %>
-        <li><%= check_box_tag "vote[#{c.id}]", p.id %> 
-        <%= c.name %></li>
-      <% end %>
-    </ul>
+    <div id="position_<%= p.id %>">
+      <ul>
+        <% p.candidates.each do |c| %>
+          <li><%=h check_box_tag "vote[#{c.id}]", 
+            p.id, 
+              false, 
+              { 'class' => "voter#{p.id}", 
+                'onClick' => "clickVote('voter#{p.id}', 
+                                        #{p.count},
+                                        'position_#{p.id}')" } %> 
+                <%= c.name %></li>
+              <% end %>
+            </ul>
+          </div>
 
   <% end %>
 

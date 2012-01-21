@@ -1,0 +1,11 @@
+<h1>Election Results</h1>
+
+
+<% @positions.each do |p| %>
+  <h2><%= p.title %></h2>
+  <ul>
+    <% p.candidates.each do |c| %>
+      <li><%= c.vote.size %> - <%= c.name %></li>
+    <% end %>
+  </ul>
+<% end %>

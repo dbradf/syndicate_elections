@@ -3,7 +3,11 @@ class VoteController < ApplicationController
   end
 
   def vote
-    @voter = Voter.new(params[:voter])
+    voter = params[:voter]
+    if voter == ""
+      redirect_to '/vote'
+    end
+    @voter = Voter.new({:name => params[:voter]})
     @voter.save
     @positions = Position.all
     @vote = Vote.new

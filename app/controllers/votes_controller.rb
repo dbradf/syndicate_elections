@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_filter :authenticate, :except => :create
+
   # GET /votes
   # GET /votes.json
   def index
@@ -43,14 +45,17 @@ class VotesController < ApplicationController
     votes = params[:vote]
     voter = params[:voter_id]
 
-    votes.each do |k,v|
-      @vote = Vote.new({:voter_id => voter,
-                        :position_id => v,
-                        :candidate_id => k })
-      @vote.save
+    if votes
+      votes.each do |k,v|
+        @vote = Vote.new({:voter_id => voter,
+                         :position_id => v,
+                         :candidate_id => k })
+        @vote.save
+      end
     end
 
-    redirect_to @vote
+
+    redirect_to '/vote'
 
     #respond_to do |format|
       #if @vote.save

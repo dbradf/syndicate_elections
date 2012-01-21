@@ -1,4 +1,6 @@
 class PositionsController < ApplicationController
+  before_filter :authenticate
+
   # GET /positions
   # GET /positions.json
   def index
@@ -79,5 +81,9 @@ class PositionsController < ApplicationController
       format.html { redirect_to positions_url }
       format.json { head :ok }
     end
+  end
+
+  def results
+    @positions = Position.all
   end
 end
